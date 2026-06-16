@@ -7,15 +7,26 @@ const EXPERIENCE = [
     role: 'Software Engineering Intern',
     period: 'Feb 2026 – Jun 2026',
     location: 'India',
-    desc: 'Developed a Kubernetes Policy Management and Network Observability Platform using Cilium, Hubble Relay, eBPF, React Flow, Node.js, and WebSocket technologies. Built an interactive network topology visualisation dashboard for real-time pod-to-pod monitoring. Implemented backend services for telemetry collection, event processing, and policy management. Integrated Cilium network policies with visualisation workflows and worked with gRPC communication pipelines.',
+    bullets: [
+      'Architected a Kubernetes Policy Management & Network Observability Platform using Cilium, Hubble Relay, eBPF, React Flow, Node.js, and WebSocket, enabling security teams to visualise and enforce network policies in real time.',
+      'Built an interactive network topology dashboard for live pod-to-pod communication monitoring across Kubernetes clusters, reducing mean-time-to-diagnose network issues for cluster operators.',
+      'Designed backend microservices for telemetry collection, event processing, and policy management using Node.js and Express.js; integrated gRPC pipelines for low-latency data streams.',
+      'Implemented Cilium network policy visualisation workflows, simplifying Kubernetes security operations and significantly reducing manual policy review overhead.',
+      'Applied Kubernetes-native networking concepts including eBPF-based observability and gRPC communication pipelines in a production-grade environment.'
+    ],
     tags: ['Kubernetes', 'Cilium', 'eBPF', 'Hubble Relay', 'React Flow', 'Node.js', 'gRPC', 'WebSockets']
   },
   {
     company: 'Nivikar Consultancy Services Ltd.',
-    role: 'Full Stack Development Intern (Remote)',
+    role: 'Full Stack Development Intern',
     period: 'Jun 2025 – Jul 2025',
     location: 'Remote',
-    desc: 'Designed and developed a complete business website using React.js, Node.js, Express.js, and MongoDB. Created responsive user interfaces optimised for desktop and mobile. Implemented RESTful APIs, database integration, and business workflow automation. Collaborated with stakeholders to convert requirements into scalable web-based solutions.',
+    bullets: [
+      'Designed and delivered an end-to-end business website (React.js, Node.js, Express.js, MongoDB) from requirements gathering to deployment, meeting all stakeholder milestones on schedule.',
+      'Built responsive, mobile-first UIs and RESTful APIs, improving page-load performance and enabling automated business workflow features that reduced manual data-entry effort.',
+      'Implemented RESTful APIs, database integration, and business workflow automation features, translating stakeholder requirements into scalable, maintainable web solutions.',
+      'Enhanced website performance, usability, and overall user experience through modern frontend development practices and iterative stakeholder feedback cycles.'
+    ],
     tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs']
   }
 ];
@@ -23,15 +34,27 @@ const EXPERIENCE = [
 const EDUCATION = [
   {
     institution: 'Xavier Institute of Management, Bhubaneswar (XIMB)',
-    degree: 'MBA in Business Management',
+    degree: 'MBA in Business Management — One of India\'s premier B-schools (AICTE accredited)',
     period: '2026 – 2028',
     location: 'Bhubaneswar, India'
   },
   {
     institution: 'Pandit Deendayal Energy University',
-    degree: 'B.Tech. in Computer Engineering — CGPA: 8.5 / 10.0',
+    degree: 'B.Tech. in Computer Engineering — CGPA: 8.5/10.0',
     period: '2022 – 2026',
     location: 'Gandhinagar, India'
+  },
+  {
+    institution: 'Higher Secondary Education (12th Grade)',
+    degree: 'Percentage: 83.54%',
+    period: '2021 – 2022',
+    location: 'Ahmedabad, India'
+  },
+  {
+    institution: 'Secondary Education (10th Grade)',
+    degree: 'Percentage: 88%',
+    period: '2019 – 2020',
+    location: 'Ahmedabad, India'
   }
 ];
 
@@ -43,12 +66,12 @@ const CERTIFICATIONS = [
 ];
 
 const SKILLS_GRID = [
-  { cat: 'Languages', items: ['Python', 'JavaScript', 'Java'] },
-  { cat: 'Frontend', items: ['React.js', 'Vue.js', 'Redux', 'Socket.IO', 'Tailwind CSS'] },
-  { cat: 'Backend', items: ['Node.js', 'Express.js', 'REST APIs', 'JWT Auth', 'Prisma ORM'] },
-  { cat: 'Data & Analytics', items: ['Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Power BI'] },
-  { cat: 'Cloud & DevOps', items: ['Kubernetes', 'Docker', 'Cilium', 'eBPF', 'gRPC'] },
+  { cat: 'Programming Languages', items: ['Python', 'JavaScript', 'Java'] },
+  { cat: 'Data Analytics', items: ['Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Power BI', 'Data Visualization', 'EDA'] },
+  { cat: 'Web Development', items: ['React.js', 'Vue.js', 'Node.js', 'Express.js', 'Redux', 'Socket.IO', 'REST APIs'] },
+  { cat: 'Cloud & DevOps', items: ['Kubernetes', 'Cilium', 'Hubble Relay', 'eBPF', 'Docker', 'gRPC', 'WebSockets'] },
   { cat: 'Databases', items: ['MongoDB', 'PostgreSQL', 'SQL'] },
+  { cat: 'Tools & Platforms', items: ['Git', 'Prisma ORM', 'JWT Authentication', 'Tailwind CSS', 'Vite', 'React Flow'] }
 ];
 
 const HOBBIES = [
@@ -86,8 +109,12 @@ function ExpRow({ exp, index }) {
         <div className="exp-company">{exp.company}</div>
         <div className="exp-role">{exp.role}</div>
         <div style={{ fontSize: '0.72rem', color: 'var(--white-dim)', letterSpacing: '0.08em', marginTop: '0.2rem' }}>{exp.location}</div>
-        <p className="exp-desc">{exp.desc}</p>
-        <div className="project-tags" style={{ marginTop: '1rem' }}>
+        <ul className="exp-desc" style={{ listStyleType: 'disc', paddingLeft: '1.2rem', marginTop: '0.8rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+          {exp.bullets.map((b, idx) => (
+            <li key={idx} style={{ fontSize: '0.85rem', color: 'var(--white-dim)', lineHeight: 1.6 }}>{b}</li>
+          ))}
+        </ul>
+        <div className="project-tags" style={{ marginTop: '1.2rem' }}>
           {exp.tags.map(t => <span key={t} className="tag">{t}</span>)}
         </div>
       </div>

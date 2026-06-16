@@ -8,7 +8,13 @@ const WORKS = [
     category: 'DevSecOps · Cloud Infrastructure',
     year: '2026',
     employer: 'Tata Consultancy Services Ltd.',
-    desc: 'Developed a Kubernetes Policy Management and Network Observability Platform using Cilium, Hubble Relay, eBPF, React Flow, Node.js, and WebSocket technologies. Built an interactive network topology visualization dashboard enabling real-time monitoring of pod-to-pod communication, backend services for telemetry collection, policy management, and gRPC communication pipelines.',
+    bullets: [
+      'Architected a Kubernetes Policy Management & Network Observability Platform using Cilium, Hubble Relay, eBPF, React Flow, Node.js, and WebSocket, enabling security teams to visualise and enforce network policies in real time.',
+      'Built an interactive network topology dashboard for live pod-to-pod communication monitoring across Kubernetes clusters, reducing mean-time-to-diagnose network issues for cluster operators.',
+      'Designed backend microservices for telemetry collection, event processing, and policy management using Node.js and Express.js; integrated gRPC pipelines for low-latency data streams.',
+      'Implemented Cilium network policy visualisation workflows, simplifying Kubernetes security operations and significantly reducing manual policy review overhead.',
+      'Applied Kubernetes-native networking concepts including eBPF-based observability and gRPC communication pipelines in a production-grade environment.'
+    ],
     tags: ['Kubernetes', 'Cilium', 'eBPF', 'Hubble Relay', 'React Flow', 'Node.js', 'gRPC', 'WebSockets'],
     color: '#080808',
     accent: 'rgba(255,255,255,0.03)'
@@ -19,7 +25,12 @@ const WORKS = [
     category: 'Full Stack · Web Development',
     year: '2025',
     employer: 'Nivikar Consultancy Services Ltd.',
-    desc: 'Designed and developed a complete business website and digital publication platform. Created highly responsive user interfaces optimized for desktop and mobile devices. Implemented secure RESTful APIs, database integration, and business workflow automation.',
+    bullets: [
+      'Designed and delivered an end-to-end business website (React.js, Node.js, Express.js, MongoDB) from requirements gathering to deployment, meeting all stakeholder milestones on schedule.',
+      'Built responsive, mobile-first UIs and RESTful APIs, improving page-load performance and enabling automated business workflow features that reduced manual data-entry effort.',
+      'Implemented RESTful APIs, database integration, and business workflow automation features, translating stakeholder requirements into scalable, maintainable web solutions.',
+      'Enhanced website performance, usability, and overall user experience through modern frontend development practices and iterative stakeholder feedback cycles.'
+    ],
     tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'Web Development'],
     color: '#080808',
     accent: 'rgba(255,255,255,0.03)'
@@ -30,7 +41,12 @@ const WORKS = [
     category: 'Machine Learning · Computer Vision',
     year: '2023',
     employer: 'Personal Project',
-    desc: 'Built a real-time gesture interpretation system using MediaPipe\'s landmark detection framework with precise 21-point hand tracking. Developed and tuned a TensorFlow-based classifier capable of identifying multiple Indian Sign Language gestures, with preprocessing, feature generation, model training, and webcam-based inference.',
+    bullets: [
+      'Built a real-time gesture recognition system using MediaPipe\'s 21-point hand-landmark detection framework, classifying multiple ISL gestures (hello, food, walk, you, water) with high accuracy over live webcam feeds.',
+      'Engineered a complete ML pipeline: data preprocessing -> feature engineering -> TensorFlow model training -> live inference; improved accuracy through frame normalisation and optimised video-stream handling.',
+      'Constructed modular, reusable pipeline components covering preprocessing, feature generation, model training, and real-time webcam-based inference.',
+      'Enhanced prediction robustness through landmark visualisation, frame-level normalisation, and adaptive video-stream management.'
+    ],
     tags: ['Python', 'TensorFlow', 'OpenCV', 'MediaPipe', 'Machine Learning'],
     color: '#080808',
     accent: 'rgba(255,255,255,0.03)'
@@ -41,7 +57,12 @@ const WORKS = [
     category: 'Full-Stack · Real-Time Dashboard',
     year: '2024',
     employer: 'Personal Project',
-    desc: 'Designed a collaborative Kanban interface supporting drag-and-drop flows, multilevel tasks, priority markers, and due-date monitoring. Utilized Redux for state handling, authored secure REST APIs using Express and PostgreSQL through Prisma ORM, and integrated Socket.IO for real-time synchronization.',
+    bullets: [
+      'Developed a full-stack collaborative Kanban board with drag-and-drop task flows, multilevel tasks, priority markers, and due-date tracking; Redux ensures predictable state and offline persistence.',
+      'Authored secure REST APIs with Express.js and PostgreSQL via Prisma ORM, enabling efficient data operations and role-based access control.',
+      'Integrated Socket.IO for real-time board synchronisation across concurrent users and team activities.',
+      'Implemented local persistence strategies to ensure offline task continuity and seamless re-sync on reconnection.'
+    ],
     tags: ['React', 'Redux', 'Node.js', 'PostgreSQL', 'Socket.IO', 'Prisma ORM'],
     color: '#080808',
     accent: 'rgba(255,255,255,0.03)'
@@ -52,7 +73,12 @@ const WORKS = [
     category: 'Data Insights & Visual Analytics',
     year: '2025',
     employer: 'Personal Project',
-    desc: 'Processed raw sales datasets by cleaning, restructuring, and extracting relevant indicators to prepare analysis-ready data. Produced analytical scripts using Pandas and NumPy to derive revenue patterns and product performance metrics, and crafted visual reports using Matplotlib and Seaborn.',
+    bullets: [
+      'Processed and cleaned raw sales datasets; derived revenue patterns, product performance metrics, and purchasing trends using Pandas and NumPy analytical scripts.',
+      'Crafted visual reports using Matplotlib and Seaborn to illustrate temporal spikes, category-level correlations, and business insights for stakeholder review.',
+      'Automated recurring data evaluation and summary generation pipelines, streamlining business intelligence reporting workflows and reducing ad-hoc analysis time.',
+      'Prepared analysis-ready data through systematic restructuring and indicator extraction, enabling downstream modelling and forecasting.'
+    ],
     tags: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Data Analytics'],
     color: '#080808',
     accent: 'rgba(255,255,255,0.03)'
@@ -63,7 +89,11 @@ const WORKS = [
     category: 'Social Impact · Community',
     year: '2023',
     employer: 'Indian Red Cross Society',
-    desc: 'Volunteered in organizing and managing large-scale blood donation camps for the Indian Red Cross Society Ahmedabad District Branch. Supported donor registration, coordination, and on-ground operations, maintaining safe protocols and accurate records.',
+    bullets: [
+      'Co-organised and managed large-scale blood donation camps, overseeing donor registration, flow coordination, and on-ground operations alongside medical teams.',
+      'Ensured adherence to safety protocols and maintained accurate participation records, demonstrating attention to detail and accountability under pressure.',
+      'Demonstrated teamwork, community leadership, and stakeholder coordination while contributing to public health and humanitarian initiatives.'
+    ],
     tags: ['Community', 'Volunteer Work', 'Coordination', 'Social Impact'],
     color: '#080808',
     accent: 'rgba(255,255,255,0.03)'
@@ -113,8 +143,12 @@ function WorkCard({ work, index }) {
             fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.6rem, 3vw, 2.5rem)',
             fontWeight: 700, lineHeight: 1.2, marginBottom: '1.5rem', color: 'var(--white)'
           }}>{work.title}</h2>
-          <div className="section-label" style={{ marginBottom: '0.4rem' }}>{work.category}</div>
-          <p style={{ color: 'var(--white-dim)', fontSize: '0.875rem', lineHeight: 1.75 }}>{work.desc}</p>
+          <div className="section-label" style={{ marginBottom: '0.6rem' }}>{work.category}</div>
+          <ul style={{ listStyleType: 'disc', paddingLeft: '1.2rem', color: 'var(--white-dim)', fontSize: '0.875rem', lineHeight: 1.75, display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: '1.5rem' }}>
+            {work.bullets.map((b, idx) => (
+              <li key={idx}>{b}</li>
+            ))}
+          </ul>
           <div className="project-tags" style={{ marginTop: '1.5rem' }}>
             {work.tags.map(t => <span key={t} className="tag">{t}</span>)}
           </div>
