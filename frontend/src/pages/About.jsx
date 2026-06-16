@@ -29,7 +29,7 @@ const EDUCATION = [
   },
   {
     institution: 'Pandit Deendayal Energy University',
-    degree: 'B.Tech. in Computer Engineering — CGPA: 8.41 / 10.0',
+    degree: 'B.Tech. in Computer Engineering — CGPA: 8.5 / 10.0',
     period: '2022 – 2026',
     location: 'Gandhinagar, India'
   }
@@ -51,6 +51,13 @@ const SKILLS_GRID = [
   { cat: 'Databases', items: ['MongoDB', 'PostgreSQL', 'SQL'] },
 ];
 
+const HOBBIES = [
+  { emoji: '🎮', label: 'Gaming', desc: 'Strategy & open-world adventures' },
+  { emoji: '✈️', label: 'Travelling', desc: 'Exploring new cultures & landscapes' },
+  { emoji: '📺', label: 'Binge-watching', desc: 'Series, films & documentaries' },
+];
+
+/* ─── Shared reveal hook ─── */
 function useReveal(threshold = 0.12) {
   const ref = useRef(null);
   useEffect(() => {
@@ -66,6 +73,137 @@ function useReveal(threshold = 0.12) {
   return ref;
 }
 
+/* ─── Each experience row is its own component (hooks rule) ─── */
+function ExpRow({ exp, index }) {
+  const ref = useReveal();
+  return (
+    <div
+      className="exp-item reveal"
+      ref={ref}
+      style={{ animationDelay: `${index * 0.12}s` }}
+    >
+      <div>
+        <div className="exp-company">{exp.company}</div>
+        <div className="exp-role">{exp.role}</div>
+        <div style={{ fontSize: '0.72rem', color: 'var(--white-dim)', letterSpacing: '0.08em', marginTop: '0.2rem' }}>{exp.location}</div>
+        <p className="exp-desc">{exp.desc}</p>
+        <div className="project-tags" style={{ marginTop: '1rem' }}>
+          {exp.tags.map(t => <span key={t} className="tag">{t}</span>)}
+        </div>
+      </div>
+      <div className="exp-year">{exp.period}</div>
+    </div>
+  );
+}
+
+/* ─── Each education row ─── */
+function EduRow({ edu, index }) {
+  const ref = useReveal();
+  return (
+    <div
+      className="exp-item reveal"
+      ref={ref}
+      style={{ animationDelay: `${index * 0.12}s` }}
+    >
+      <div>
+        <div className="exp-company">{edu.institution}</div>
+        <div className="exp-role">{edu.degree}</div>
+        <div style={{ fontSize: '0.72rem', color: 'var(--white-dim)', letterSpacing: '0.08em', marginTop: '0.2rem' }}>{edu.location}</div>
+      </div>
+      <div className="exp-year">{edu.period}</div>
+    </div>
+  );
+}
+
+/* ─── Each skill card ─── */
+function SkillCard({ cat, index }) {
+  const ref = useReveal(0.05);
+  return (
+    <div
+      className="reveal skill-card"
+      ref={ref}
+      style={{
+        padding: '2rem',
+        borderRight: '1px solid var(--border)',
+        borderBottom: '1px solid var(--border)',
+        animationDelay: `${index * 0.08}s`,
+        transition: 'background 0.4s, transform 0.4s cubic-bezier(0.175,0.885,0.32,1.1)',
+        cursor: 'default'
+      }}
+      onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-dim)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+      onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.transform = 'translateY(0)'; }}
+    >
+      <div style={{
+        fontSize: '0.65rem', letterSpacing: '0.18em', textTransform: 'uppercase',
+        color: 'var(--accent)', marginBottom: '1rem'
+      }}>{cat.cat}</div>
+      <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        {cat.items.map(item => (
+          <li key={item} style={{ fontSize: '0.875rem', color: 'var(--white)' }}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* ─── Each cert row ─── */
+function CertRow({ cert, index }) {
+  const ref = useReveal();
+  return (
+    <div
+      className="reveal"
+      ref={ref}
+      style={{
+        padding: '1.5rem 0',
+        borderBottom: '1px solid var(--border)',
+        display: 'flex', alignItems: 'center', gap: '1.5rem',
+        animationDelay: `${index * 0.1}s`,
+        transition: 'color 0.3s'
+      }}
+    >
+      <span style={{ fontSize: '0.7rem', color: 'var(--accent)', letterSpacing: '0.1em', minWidth: '28px' }}>
+        {String(index + 1).padStart(2, '0')}
+      </span>
+      <span style={{ fontSize: '0.95rem', color: 'var(--white)' }}>{cert}</span>
+    </div>
+  );
+}
+
+/* ─── Hobby card ─── */
+function HobbyCard({ hobby, index }) {
+  const ref = useReveal(0.1);
+  return (
+    <div
+      className="reveal"
+      ref={ref}
+      style={{
+        animationDelay: `${index * 0.15}s`,
+        padding: '2rem',
+        border: '1px solid var(--border)',
+        borderRadius: '4px',
+        display: 'flex', flexDirection: 'column', gap: '0.8rem',
+        transition: 'background 0.4s, transform 0.4s cubic-bezier(0.175,0.885,0.32,1.1), border-color 0.4s',
+        cursor: 'default'
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.background = 'var(--accent-dim)';
+        e.currentTarget.style.borderColor = 'var(--accent)';
+        e.currentTarget.style.transform = 'translateY(-6px) scale(1.02)';
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.background = 'transparent';
+        e.currentTarget.style.borderColor = 'var(--border)';
+        e.currentTarget.style.transform = 'translateY(0) scale(1)';
+      }}
+    >
+      <div style={{ fontSize: '2rem' }}>{hobby.emoji}</div>
+      <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: 700 }}>{hobby.label}</div>
+      <div style={{ fontSize: '0.82rem', color: 'var(--white-dim)', lineHeight: 1.6 }}>{hobby.desc}</div>
+    </div>
+  );
+}
+
+/* ─── Page ─── */
 export default function About() {
   const heroRef = useRef(null);
   const photoRef = useRef(null);
@@ -90,6 +228,7 @@ export default function About() {
   const eduRef = useReveal();
   const skillsRef = useReveal();
   const certRef = useReveal();
+  const hobbyRef = useReveal();
 
   return (
     <>
@@ -153,6 +292,23 @@ export default function About() {
         </div>
       </section>
 
+      {/* Hobbies */}
+      <section className="section" style={{ paddingTop: '2rem' }}>
+        <div className="container">
+          <div style={{ marginBottom: '3rem' }} className="reveal" ref={hobbyRef}>
+            <div className="section-label">Beyond Code</div>
+            <h2 className="section-title" style={{ marginTop: '0.5rem' }}>Hobbies &amp; Interests</h2>
+          </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '1.5rem'
+          }}>
+            {HOBBIES.map((h, i) => <HobbyCard key={h.label} hobby={h} index={i} />)}
+          </div>
+        </div>
+      </section>
+
       {/* Experience */}
       <section className="section" style={{ paddingTop: '2rem' }}>
         <div className="container">
@@ -161,23 +317,7 @@ export default function About() {
             <h2 className="section-title" style={{ marginTop: '0.5rem' }}>Where I've Worked</h2>
           </div>
           <div className="experience-list">
-            {EXPERIENCE.map((exp, i) => {
-              const r = useReveal();
-              return (
-                <div key={i} className={`exp-item reveal reveal-delay-${i + 1}`} ref={r}>
-                  <div>
-                    <div className="exp-company">{exp.company}</div>
-                    <div className="exp-role">{exp.role}</div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--white-dim)', letterSpacing: '0.08em', marginTop: '0.2rem' }}>{exp.location}</div>
-                    <p className="exp-desc">{exp.desc}</p>
-                    <div className="project-tags" style={{ marginTop: '1rem' }}>
-                      {exp.tags.map(t => <span key={t} className="tag">{t}</span>)}
-                    </div>
-                  </div>
-                  <div className="exp-year">{exp.period}</div>
-                </div>
-              );
-            })}
+            {EXPERIENCE.map((exp, i) => <ExpRow key={i} exp={exp} index={i} />)}
           </div>
         </div>
       </section>
@@ -190,19 +330,7 @@ export default function About() {
             <h2 className="section-title" style={{ marginTop: '0.5rem' }}>Academic Background</h2>
           </div>
           <div className="experience-list">
-            {EDUCATION.map((edu, i) => {
-              const r = useReveal();
-              return (
-                <div key={i} className={`exp-item reveal reveal-delay-${i + 1}`} ref={r}>
-                  <div>
-                    <div className="exp-company">{edu.institution}</div>
-                    <div className="exp-role">{edu.degree}</div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--white-dim)', letterSpacing: '0.08em', marginTop: '0.2rem' }}>{edu.location}</div>
-                  </div>
-                  <div className="exp-year">{edu.period}</div>
-                </div>
-              );
-            })}
+            {EDUCATION.map((edu, i) => <EduRow key={i} edu={edu} index={i} />)}
           </div>
         </div>
       </section>
@@ -220,29 +348,7 @@ export default function About() {
             gap: '0',
             border: '1px solid var(--border)'
           }}>
-            {SKILLS_GRID.map((cat, i) => {
-              const r = useReveal(0.05);
-              return (
-                <div key={i} className="reveal" ref={r} style={{
-                  padding: '2rem',
-                  borderRight: '1px solid var(--border)',
-                  borderBottom: '1px solid var(--border)',
-                  animationDelay: `${i * 0.08}s`
-                }}>
-                  <div style={{
-                    fontSize: '0.65rem', letterSpacing: '0.18em', textTransform: 'uppercase',
-                    color: 'var(--white-dim)', marginBottom: '1rem'
-                  }}>{cat.cat}</div>
-                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {cat.items.map(item => (
-                      <li key={item} style={{ fontSize: '0.875rem', color: 'var(--white)' }}>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
+            {SKILLS_GRID.map((cat, i) => <SkillCard key={i} cat={cat} index={i} />)}
           </div>
         </div>
       </section>
@@ -255,21 +361,7 @@ export default function About() {
             <h2 className="section-title" style={{ marginTop: '0.5rem' }}>Certifications</h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {CERTIFICATIONS.map((cert, i) => {
-              const r = useReveal();
-              return (
-                <div key={i} className={`reveal reveal-delay-${i + 1}`} ref={r} style={{
-                  padding: '1.5rem 0',
-                  borderBottom: '1px solid var(--border)',
-                  display: 'flex', alignItems: 'center', gap: '1.5rem'
-                }}>
-                  <span style={{ fontSize: '0.7rem', color: 'var(--white-dim)', letterSpacing: '0.1em', minWidth: '28px' }}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span style={{ fontSize: '0.95rem', color: 'var(--white)' }}>{cert}</span>
-                </div>
-              );
-            })}
+            {CERTIFICATIONS.map((cert, i) => <CertRow key={i} cert={cert} index={i} />)}
           </div>
         </div>
       </section>

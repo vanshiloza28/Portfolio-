@@ -124,25 +124,26 @@ function WorkCard({ work, index }) {
         <div style={{
           aspect: '4/3',
           aspectRatio: '4/3',
-          background: `linear-gradient(135deg, #0d0d0d 0%, #151515 100%)`,
-          border: '1px solid var(--border)',
+          background: `linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%)`,
+          border: '1.5px solid var(--accent)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          position: 'relative', overflow: 'hidden'
+          position: 'relative', overflow: 'hidden',
+          boxShadow: '0 8px 30px var(--accent-dim)'
         }}>
           <div style={{
             position: 'absolute', inset: 0,
-            background: work.accent,
+            background: 'var(--accent-dim)',
             transition: 'opacity 0.4s'
           }} />
           <div style={{ textAlign: 'center', position: 'relative' }}>
             <div style={{
               fontFamily: 'var(--font-serif)', fontSize: 'clamp(3rem, 6vw, 6rem)',
-              fontWeight: 900, opacity: 0.05, lineHeight: 1,
-              color: 'var(--white)'
+              fontWeight: 900, opacity: 0.12, lineHeight: 1,
+              color: 'var(--accent)'
             }}>
               {String(index + 1).padStart(2, '0')}
             </div>
-            <div style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--white-dim)', marginTop: '1rem' }}>
+            <div style={{ fontSize: '0.72rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: 600, marginTop: '1rem' }}>
               {work.category.split('·')[0].trim()}
             </div>
           </div>

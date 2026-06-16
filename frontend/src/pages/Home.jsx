@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Marquee from '../components/Marquee';
 import Footer from '../components/Footer';
@@ -39,6 +39,7 @@ const PROJECTS = [
   }
 ];
 
+/* ─── Shared reveal hook ─── */
 function useReveal(threshold = 0.15) {
   const ref = useRef(null);
   useEffect(() => {
@@ -54,6 +55,42 @@ function useReveal(threshold = 0.15) {
   return ref;
 }
 
+/* ─── Animated counter ─── */
+function CountUp({ target, suffix = '' }) {
+  const [value, setValue] = useState(0);
+  const ref = useRef(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !started.current) {
+        started.current = true;
+        const numTarget = parseFloat(target);
+        const isDecimal = String(target).includes('.');
+        const duration = 1400;
+        const start = performance.now();
+        const tick = (now) => {
+          const t = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+          const cur = numTarget * ease;
+          setValue(isDecimal ? cur.toFixed(1) : Math.floor(cur));
+          if (t < 1) requestAnimationFrame(tick);
+          else setValue(target);
+        };
+        requestAnimationFrame(tick);
+        obs.disconnect();
+      }
+    }, { threshold: 0.5 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [target]);
+
+  return <span ref={ref}>{value}{suffix}</span>;
+}
+
+/* ─── Hero ─── */
 function HeroSection() {
   const line1 = useRef(null);
   const line2 = useRef(null);
@@ -79,10 +116,10 @@ function HeroSection() {
 
   return (
     <section className="hero">
-      {/* Subtle ambient grain */}
+      {/* Ambient glow */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.03) 0%, transparent 60%)',
+        background: 'radial-gradient(ellipse at 70% 30%, rgba(14,165,233,0.07) 0%, transparent 60%)',
         pointerEvents: 'none'
       }} />
 
@@ -135,26 +172,50 @@ function HeroSection() {
   );
 }
 
+/* ─── Stats ─── */
 function StatsSection() {
   const ref = useReveal(0.3);
   return (
     <div className="stats-row reveal" ref={ref}>
       <div className="stat-item">
-        <div className="stat-number">2+</div>
-        <div className="stat-label">Years Experience</div>
+        <div className="stat-number"><CountUp target="8.5" /></div>
+        <div className="stat-label">Academic CGPA</div>
       </div>
       <div className="stat-item">
-        <div className="stat-number">5+</div>
-        <div className="stat-label">Projects Shipped</div>
+        <div className="stat-number"><CountUp target="8" suffix="+" /></div>
+        <div className="stat-label">Projects Built</div>
       </div>
       <div className="stat-item">
-        <div className="stat-number">2</div>
+        <div className="stat-number"><CountUp target="2" /></div>
         <div className="stat-label">Industry Internships</div>
       </div>
     </div>
   );
 }
 
+/* ─── Single project row (own component so hooks are valid) ─── */
+function ProjectRow({ p, index }) {
+  const ref = useReveal(0.1);
+  return (
+    <div
+      className={`project-item reveal`}
+      ref={ref}
+      style={{ animationDelay: `${index * 0.12}s` }}
+    >
+      <div className="project-num">{p.num}</div>
+      <div className="project-info">
+        <div className="project-title">{p.title}</div>
+        <div className="project-meta">{p.category} · {p.employer}</div>
+        <div className="project-tags">
+          {p.tags.map(t => <span key={t} className="tag">{t}</span>)}
+        </div>
+      </div>
+      <div className="project-arrow">↗</div>
+    </div>
+  );
+}
+
+/* ─── Projects ─── */
 function ProjectsSection() {
   const titleRef = useReveal();
   return (
@@ -171,28 +232,16 @@ function ProjectsSection() {
         </div>
 
         <div className="project-list">
-          {PROJECTS.map((p, i) => {
-            const itemRef = useReveal(0.1);
-            return (
-              <div key={p.id} className={`project-item reveal reveal-delay-${i + 1}`} ref={itemRef}>
-                <div className="project-num">{p.num}</div>
-                <div className="project-info">
-                  <div className="project-title">{p.title}</div>
-                  <div className="project-meta">{p.category} · {p.employer}</div>
-                  <div className="project-tags">
-                    {p.tags.map(t => <span key={t} className="tag">{t}</span>)}
-                  </div>
-                </div>
-                <div className="project-arrow">↗</div>
-              </div>
-            );
-          })}
+          {PROJECTS.map((p, i) => (
+            <ProjectRow key={p.id} p={p} index={i} />
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
+/* ─── Page ─── */
 export default function Home() {
   return (
     <>

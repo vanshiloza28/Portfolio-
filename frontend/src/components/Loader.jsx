@@ -28,23 +28,10 @@ export default function Loader({ onDone }) {
       pointerEvents: exit ? 'none' : 'all'
     }}>
       <div className="loader-name">
-        {'Vanshil Oza'.split('').map((ch, i) => (
-          <span key={i} style={{
-            display: 'inline-block',
-            animation: `loaderChar 0.6s cubic-bezier(.23,1,.32,1) ${i * 0.04}s both`
-          }}>
-            {ch === ' ' ? '\u00a0' : ch}
-          </span>
-        ))}
+        Vanshil Oza
       </div>
       <div className="loader-bar" />
       <div className="loader-pct">{pct}%</div>
-      <style>{`
-        @keyframes loaderChar {
-          from { opacity:0; transform: translateY(30px); }
-          to   { opacity:1; transform: translateY(0); }
-        }
-      `}</style>
     </div>
   );
 }
