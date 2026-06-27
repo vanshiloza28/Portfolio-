@@ -189,7 +189,7 @@ function WorkCard({ work, index }) {
           <div style={{ textAlign: 'center', position: 'relative' }}>
             <div style={{
               fontFamily: 'var(--font-serif)', fontSize: 'clamp(3rem, 6vw, 6rem)',
-              fontWeight: 900, opacity: 0.12, lineHeight: 1,
+              fontWeight: 900, opacity: 0.45, lineHeight: 1,
               color: 'var(--accent)'
             }}>
               {String(index + 1).padStart(2, '0')}
