@@ -189,12 +189,12 @@ function WorkCard({ work, index }) {
           <div style={{ textAlign: 'center', position: 'relative' }}>
             <div style={{
               fontFamily: 'var(--font-serif)', fontSize: 'clamp(3rem, 6vw, 6rem)',
-              fontWeight: 900, opacity: 0.12, lineHeight: 1,
+              fontWeight: 900, opacity: 0, lineHeight: 1,
               color: 'var(--accent)'
             }}>
               {String(index + 1).padStart(2, '0')}
             </div>
-            <div style={{ fontSize: '0.72rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: 600, marginTop: '1rem' }}>
+            <div style={{ fontSize: '1rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: '#FF6B00', fontWeight: 800, marginTop: '1rem' }}>
               {work.category.split('·')[0].trim()}
             </div>
           </div>
