@@ -84,6 +84,23 @@ const WORKS = [
     accent: 'rgba(255,255,255,0.03)'
   },
   {
+    id: 'iot-encryption',
+    title: 'Lightweight Image Encryption for IoT',
+    category: 'Cybersecurity · IoT',
+    year: '2024',
+    employer: 'Personal Project',
+    bullets: [
+      'Engineered a lightweight, chaotic map-based image encryption & decryption system using high-entropy Logistic and Tent maps, optimised for constrained IoT environments.',
+      'Implemented rigorous security evaluation metrics — NPCR, UACI, and Shannon Entropy — to quantitatively validate cipher strength against differential and statistical attacks.',
+      'Built an interactive glassmorphic React dashboard with dual light/dark modes, providing real-time visualisation of encryption pipelines and security metric outputs.',
+      'Integrated live MQTT stream decryption to simulate real-world IoT data pipelines, enabling end-to-end encrypted image transmission and recovery demonstrations.'
+    ],
+    tags: ['Python', 'React', 'MQTT', 'Cryptography', 'IoT', 'Logistic Map', 'Tent Map'],
+    color: '#080808',
+    accent: 'rgba(255,255,255,0.03)',
+    github: 'https://github.com/vanshiloza28/Lightweight-Image-Encryption-for-IoT'
+  },
+  {
     id: 'red-cross',
     title: 'Social Work & Volunteering',
     category: 'Social Impact · Community',

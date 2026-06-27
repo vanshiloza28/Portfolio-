@@ -30,12 +30,12 @@ const PROJECTS = [
   },
   {
     id: 3, num: '03',
-    title: 'Kanban Task Management System',
-    category: 'Full Stack · Real-Time',
+    title: 'Lightweight Image Encryption for IoT',
+    category: 'Cybersecurity · IoT',
     employer: 'Personal Project',
     year: '2024',
-    tags: ['React', 'Redux', 'Node.js', 'PostgreSQL', 'Socket.IO', 'Prisma ORM'],
-    desc: 'Collaborative Kanban board with drag-and-drop, real-time sync via Socket.IO, and role-based REST APIs.'
+    tags: ['Python', 'React', 'MQTT', 'Cryptography', 'IoT', 'Logistic Map', 'Tent Map'],
+    desc: 'Chaotic map-based image encryption & decryption dashboard for IoT with NPCR/UACI/Entropy metrics, glassmorphic UI, and live MQTT stream decryption.'
   }
 ];
 
@@ -182,7 +182,7 @@ function StatsSection() {
         <div className="stat-label">Academic CGPA</div>
       </div>
       <div className="stat-item">
-        <div className="stat-number"><CountUp target="8" suffix="+" /></div>
+        <div className="stat-number"><CountUp target="9" suffix="+" /></div>
         <div className="stat-label">Projects Built</div>
       </div>
       <div className="stat-item">
